@@ -127,7 +127,7 @@ class _GetMessageListScreenState extends State<GetMessageListScreen> {
                                 onPressed: () {
                                   getListGuidebookItems();
                                   showDialog(context: context, builder: (BuildContext context){
-                                    return showDialogChoosing(context: context, onPressGuidebooks:(){
+                                    return showDialogChoosing(context: context, isMail: false, onPressGuidebooks:(){
                                       Navigator.push(context, MaterialPageRoute(
                                         builder: (context) => SendGuidebooks(token: widget.token,messageId: _messageListItems[index].id,)
                                       ));
@@ -146,27 +146,27 @@ class _GetMessageListScreenState extends State<GetMessageListScreen> {
             );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => MessageScreen(token: widget.token,),
-              ));
-        },
-        child: Container(
-          width: 80,
-          height: 80,
-          child: Icon(
-            Icons.add,
-            size: 35,
-          ),
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                  colors: [Color(0xFF54A9FF), Color(0xFFC078FF)])),
-        ),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Navigator.push(
+      //         context,
+      //         MaterialPageRoute(
+      //           builder: (context) => MessageScreen(token: widget.token,),
+      //         ));
+      //   },
+      //   child: Container(
+      //     width: 80,
+      //     height: 80,
+      //     child: Icon(
+      //       Icons.add,
+      //       size: 35,
+      //     ),
+      //     decoration: BoxDecoration(
+      //         shape: BoxShape.circle,
+      //         gradient: LinearGradient(
+      //             colors: [Color(0xFF54A9FF), Color(0xFFC078FF)])),
+      //   ),
+      // ),
     );
   }
 

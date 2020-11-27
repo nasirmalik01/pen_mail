@@ -16,15 +16,26 @@ Future<String> getGroupList({String token}) async {
   return reply;
 }
 
-Future<String> addGroup({String token, String groupName}) async {
+Future<String> addGroup({String token, String groupName, List<int> guidebookItems,}) async {
+  List<Map<String,dynamic>> products;
+  for(int i=0; i<guidebookItems.length; i++){
+   int guidebookId = guidebookItems[i];
+    products =  [
+     {
+       "id": guidebookId,
+
+     }
+   ];
+  }
   final String apiUrl = 'https://dev.penmail.com.tr/api/Group/add';
   HttpClient httpClient = new HttpClient();
   HttpClientRequest request = await httpClient.postUrl(Uri.parse(apiUrl));
   request.headers.set('content-type', 'application/json');
   request.headers.set('person_token', token);
   request.add(utf8.encode(
-    jsonEncode(<String, String>{
-      'name': groupName
+    jsonEncode(<dynamic, dynamic>{
+      'name': groupName,
+      'Guidebooks' : products
     }),
   ));
   HttpClientResponse response = await request.close();
@@ -32,3 +43,20 @@ Future<String> addGroup({String token, String groupName}) async {
   httpClient.close();
   return reply;
 }
+
+// Future<String> addGroup({String token, String groupName}) async {
+//   final String apiUrl = 'https://dev.penmail.com.tr/api/Group/add';
+//   HttpClient httpClient = new HttpClient();
+//   HttpClientRequest request = await httpClient.postUrl(Uri.parse(apiUrl));
+//   request.headers.set('content-type', 'application/json');
+//   request.headers.set('person_token', token);
+//   request.add(utf8.encode(
+//     jsonEncode(<String, String>{
+//       'name': groupName
+//     }),
+//   ));
+//   HttpClientResponse response = await request.close();
+//   String reply = await response.transform(utf8.decoder).join();
+//   httpClient.close();
+//   return reply;
+// }

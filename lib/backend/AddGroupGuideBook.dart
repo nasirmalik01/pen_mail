@@ -5,7 +5,7 @@ import 'dart:io';
 
 Future<String> addGroupInGuideBook(
     {String token, int groupId, int guideId}) async {
-  List<Map<String,dynamic>> products = [
+  List<Map<String,dynamic>> products =  [
     {
       "guidebook_id": guideId,
       "groups_id": groupId,

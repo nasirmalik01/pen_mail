@@ -9,6 +9,7 @@ import 'package:pen_mail_project/backend/GuideBook.dart';
 import 'package:pen_mail_project/entities/AddGuideInGroup.dart';
 import 'package:pen_mail_project/entities/GroupsEntity.dart';
 import 'package:pen_mail_project/entities/GuidebookEntity.dart';
+import 'package:pen_mail_project/screens/AddGroupScreen.dart';
 import 'package:pen_mail_project/screens/AddGuideBook.dart';
 import 'package:pen_mail_project/screens/GuidebookGroupsScreen.dart';
 import 'package:pen_mail_project/screens/HomePageScreen.dart';
@@ -136,8 +137,7 @@ class _GroupPageScreenState extends State<GroupPageScreen> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 GuidebookGroupScreen(
-                                                  groupName:
-                                                      _groupListItems[index].name,
+                                                  groupName: _groupListItems[index].name,
                                                   token: widget.token,
                                                   id: _id
                                                 )));
@@ -185,57 +185,60 @@ class _GroupPageScreenState extends State<GroupPageScreen> {
                     colors: [Color(0xFF54A9FF), Color(0xFFC078FF)])),
           ),
           onPressed: () {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return showAddGroupDialog(
-                      title: 'Add Group',
-                      addGroupController: _addGroupController,
-                      mediaQueryData: MediaQuery.of(context),
-                      isLoading: _isLoading,
-                      onPress: () async {
-
-                        if(_addGroupController.text.isEmpty){
-                          return;
-                        }
-                        setState(() {
-                          _isLoading = true;
-                        });
-
-                        FocusScopeNode currentFocus = FocusScope.of(context);
-                        if (!currentFocus.hasPrimaryFocus) {
-                          currentFocus.unfocus();
-                        }
-
-                        var _response = await addGroup(
-                            token: widget.token,
-                            groupName: _addGroupController.text);
-
-                        var _res = jsonDecode(_response);
-                        var status = _res['status'];
-                        if (status == false) {
-                          setState(() {
-                            _isLoading = false;
-                          });
-                          //print('null');
-                          _scaffoldKey.currentState.showSnackBar(SnackBar(
-                            content: Text('Error occurred, Try Again'),
-                          ));
-                          return;
-                        }
-
-                        setState(() {
-                          _isLoading = false;
-                        });
-                        _getGroupList();
-                        _scaffoldKey.currentState.hideCurrentSnackBar();
-                        _scaffoldKey.currentState.showSnackBar(SnackBar(
-                          content: Text('Group Added successfully'),
-                        ));
-                        _addGroupController.clear();
-                        Navigator.pop(context);
-                      });
-                });
+            Navigator.push(context, MaterialPageRoute(
+              builder: (ctx) => AddGroupScreen(token: widget.token)
+            ));
+            // showDialog(
+            //     context: context,
+            //     builder: (BuildContext context) {
+            //       return showAddGroupDialog(
+            //           title: 'Add Group',
+            //           addGroupController: _addGroupController,
+            //           mediaQueryData: MediaQuery.of(context),
+            //           isLoading: _isLoading,
+            //           onPress: () async {
+            //
+            //             if(_addGroupController.text.isEmpty){
+            //               return;
+            //             }
+            //             setState(() {
+            //               _isLoading = true;
+            //             });
+            //
+            //             FocusScopeNode currentFocus = FocusScope.of(context);
+            //             if (!currentFocus.hasPrimaryFocus) {
+            //               currentFocus.unfocus();
+            //             }
+            //
+            //             var _response = await addGroup(
+            //                 token: widget.token,
+            //                 groupName: _addGroupController.text);
+            //
+            //             var _res = jsonDecode(_response);
+            //             var status = _res['status'];
+            //             if (status == false) {
+            //               setState(() {
+            //                 _isLoading = false;
+            //               });
+            //               //print('null');
+            //               _scaffoldKey.currentState.showSnackBar(SnackBar(
+            //                 content: Text('Error occurred, Try Again'),
+            //               ));
+            //               return;
+            //             }
+            //
+            //             setState(() {
+            //               _isLoading = false;
+            //             });
+            //             _getGroupList();
+            //             _scaffoldKey.currentState.hideCurrentSnackBar();
+            //             _scaffoldKey.currentState.showSnackBar(SnackBar(
+            //               content: Text('Group Added successfully'),
+            //             ));
+            //             _addGroupController.clear();
+            //             Navigator.pop(context);
+            //           });
+            //     });
           },
         ));
   }

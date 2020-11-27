@@ -1,7 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:pen_mail_project/screens/AddingGuideInGroups.dart';
+import 'package:pen_mail_project/screens/ComposeMessage/ComposeMessageScreen.dart';
+import 'package:pen_mail_project/screens/DummyScreen.dart';
 import 'package:pen_mail_project/screens/GroupPageScreen.dart';
 import 'package:pen_mail_project/screens/GuidebookScreen.dart';
 import 'package:pen_mail_project/screens/HomePageScreen.dart';
@@ -34,11 +34,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: <Color>[
-                        Color(0xFF54A9FF),
-                        Color(0xFFC078FF)
-                      ])
-              ),
+                      colors: <Color>[Color(0xFF54A9FF), Color(0xFFC078FF)])),
             ),
           ),
           Divider(),
@@ -50,7 +46,9 @@ class _AppDrawerState extends State<AppDrawer> {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (ctx) => HomePageScreen(token: widget.token,)));
+                      builder: (ctx) => HomePageScreen(
+                            token: widget.token,
+                          )));
             },
           ),
           Divider(),
@@ -79,6 +77,18 @@ class _AppDrawerState extends State<AppDrawer> {
           ),
           Divider(),
           ListTile(
+            leading: Icon(Icons.add_circle),
+            title: Text('Compose',
+                style: TextStyle(fontFamily: 'Nunito', fontSize: 16)),
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (ctx) => ComposeMessageScreen(token: widget.token)));
+            },
+          ),
+          Divider(),
+          ListTile(
             leading: Icon(Icons.message),
             title: Text('Messages',
                 style: TextStyle(fontFamily: 'Nunito', fontSize: 16)),
@@ -86,12 +96,13 @@ class _AppDrawerState extends State<AppDrawer> {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (ctx) => GetMessageListScreen(token: widget.token)));
+                      builder: (ctx) =>
+                          GetMessageListScreen(token: widget.token)));
             },
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.library_books),
+            leading: Icon(Icons.edit),
             title: Text('Signature',
                 style: TextStyle(fontFamily: 'Nunito', fontSize: 16)),
             onTap: () {
@@ -102,8 +113,6 @@ class _AppDrawerState extends State<AppDrawer> {
             },
           ),
           Divider(),
-
-
         ],
       ),
     );

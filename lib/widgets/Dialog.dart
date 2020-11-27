@@ -225,7 +225,7 @@ Widget showAddGroupDialog(
       ));
 }
 
-Widget showDialogChoosing({BuildContext context, Function onPressGuidebooks, Function onPressGroups}) {
+Widget showDialogChoosing({BuildContext context, Function onPressGuidebooks, Function onPressGroups, bool isMail = false}) {
   return Dialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0)), //this right here
@@ -235,7 +235,7 @@ Widget showDialogChoosing({BuildContext context, Function onPressGuidebooks, Fun
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Send Message to:',
+              isMail ? 'Send Mail to' :  'Send Message to:',
               style: TextStyle(
                   color: Colors.black, fontFamily: 'Raleway', fontSize: 18),
             ),
