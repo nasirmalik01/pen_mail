@@ -112,8 +112,8 @@ class _ComposeMessageGuidebookState extends State<ComposeMessageGuidebook> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: CheckboxListTile(
-                            title: Text(_guideBookItems[index].surname),
-                            subtitle: Text(_guideBookItems[index].email),
+                            title: Text(_guideBookItems[index].surname.toString()),
+                            subtitle: Text(_guideBookItems[index].email.toString()),
                             value: _guideBookItems[index].isCheck ?? false,
                             onChanged: (bool value) {
                               setState(() {

@@ -21,16 +21,11 @@ class ComposeMessageScreen extends StatefulWidget {
 class _ComposeMessageScreenState extends State<ComposeMessageScreen> {
   TextEditingController _sendingPersonController = TextEditingController();
   TextEditingController _mailSubjectController = TextEditingController();
-
-  //TextEditingController _mailSignatureController = TextEditingController();
   TextEditingController _mailContentController = TextEditingController();
 
   List<SignatureEntity> _signatureListItems = List();
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _contentController = TextEditingController();
   String _signatureId;
-  String _initialSignValue = 'Signature Name 1';
+  String _initialSignValue;
 
   List<DropdownMenuItem> _getDropMenuSignatureItems() {
     List<DropdownMenuItem<String>> dropDownCategoryItems = [];
@@ -61,23 +56,36 @@ class _ComposeMessageScreenState extends State<ComposeMessageScreen> {
       });
     }
     // for(int i=0; i<_signatureListItems.length; i++){
-    //   _initialSignValue = _signatureListItems[0].name;
+    //   setState(() {
+    //     _initialSignValue = _signatureListItems[0].name;
+    //   });
     // }
-
     return _groupItems;
   }
 
+
   _getGroupList() {
     setState(() {
-      _getSignatureListItems().then((value) => _signatureListItems = value);
+      _getSignatureListItems().then((value) {
+        _signatureListItems = value;
+        for(int i=0; i<_signatureListItems.length; i++){
+          setState(() {
+            _initialSignValue = _signatureListItems[0].name;
+          });
+        }
+        return _signatureListItems = value;
+      });
     });
   }
+
 
   @override
   void initState() {
     _getGroupList();
     super.initState();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -197,9 +205,12 @@ class _ComposeMessageScreenState extends State<ComposeMessageScreen> {
                                 MaterialPageRoute(
                                     builder: (ctx) => AttachmentFileScreen(
                                           token: widget.token,
-                                          sendingPerson: _sendingPersonController.text,
-                                          mailSubject: _mailSubjectController.text,
-                                          mailContent: _mailContentController.text,
+                                          sendingPerson:
+                                              _sendingPersonController.text,
+                                          mailSubject:
+                                              _mailSubjectController.text,
+                                          mailContent:
+                                              _mailContentController.text,
                                           signatureId: _signatureId,
                                         )));
                           }),

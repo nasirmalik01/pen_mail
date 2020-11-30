@@ -47,7 +47,7 @@ Widget showAddDialog(
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: addGuideBookInputField(
+                  child: addGuideBookGSMInputField(
                       controller: gsmController,
                       hintText: 'GSM',
                       inputField: 'GSM Number'),
@@ -129,7 +129,7 @@ Widget showUpdateDialog(
                   child: addGuideBookInputField(
                       controller: gsmController,
                       hintText: 'GSM',
-                      inputField: 'GSM Number'),
+                      inputField: 'GSM Number',),
                 ),
                 Container(
                   margin:
@@ -225,7 +225,11 @@ Widget showAddGroupDialog(
       ));
 }
 
-Widget showDialogChoosing({BuildContext context, Function onPressGuidebooks, Function onPressGroups, bool isMail = false}) {
+Widget showDialogChoosing(
+    {BuildContext context,
+    Function onPressGuidebooks,
+    Function onPressGroups,
+    bool isMail = false}) {
   return Dialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0)), //this right here
@@ -235,7 +239,7 @@ Widget showDialogChoosing({BuildContext context, Function onPressGuidebooks, Fun
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              isMail ? 'Send Mail to' :  'Send Message to:',
+              isMail ? 'Send Mail to' : 'Send Message to:',
               style: TextStyle(
                   color: Colors.black, fontFamily: 'Raleway', fontSize: 18),
             ),
@@ -278,15 +282,13 @@ Widget showDialogChoosing({BuildContext context, Function onPressGuidebooks, Fun
       ));
 }
 
-
-
 Widget showAddSignatureDialog(
     {TextEditingController nameController,
     TextEditingController contentController,
-      MediaQueryData mediaQueryData,
-      Function onPress,
-      bool isLoading = false,
-      String title}) {
+    MediaQueryData mediaQueryData,
+    Function onPress,
+    bool isLoading = false,
+    String title}) {
   return Dialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0)), //this right here
@@ -317,30 +319,31 @@ Widget showAddSignatureDialog(
                         inputField: 'Signature Name'),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      maxLines: 5,
-                        controller: contentController,
-                        decoration: InputDecoration(
-                          hintText: 'Signature Content',
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black, width: 2),
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                          maxLines: 5,
+                          controller: contentController,
+                          decoration: InputDecoration(
+                            hintText: 'Signature Content',
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.black, width: 2),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1),
+                            ),
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey, width: 1),
-                          ),
-                        ),
-                        style: TextStyle(fontFamily: 'Raleway'),
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Signature Content can\'t be empty';
-                          }
-                          return null;
-                        })
-                  ),
+                          style: TextStyle(fontFamily: 'Raleway'),
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Signature Content can\'t be empty';
+                            }
+                            return null;
+                          })),
                   Container(
                     margin:
-                    EdgeInsets.only(top: mediaQueryData.size.height * 0.04),
+                        EdgeInsets.only(top: mediaQueryData.size.height * 0.04),
                     width: mediaQueryData.size.width * 0.5,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
@@ -348,15 +351,15 @@ Widget showAddSignatureDialog(
                     child: FlatButton(
                       child: isLoading == true
                           ? SpinKitFadingCircle(
-                        color: Colors.white,
-                      )
+                              color: Colors.white,
+                            )
                           : Text(
-                        'Add Signature',
-                        style: TextStyle(
-                            fontFamily: 'Nunito',
-                            fontSize: 18,
-                            color: Colors.white),
-                      ),
+                              'Add Signature',
+                              style: TextStyle(
+                                  fontFamily: 'Nunito',
+                                  fontSize: 18,
+                                  color: Colors.white),
+                            ),
                       onPressed: onPress,
                     ),
                   )

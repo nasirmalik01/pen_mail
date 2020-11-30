@@ -137,13 +137,13 @@ class _GroupPageScreenState extends State<GroupPageScreen> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 GuidebookGroupScreen(
-                                                  groupName: _groupListItems[index].name,
+                                                  groupName: _groupListItems[index].name.toString(),
                                                   token: widget.token,
                                                   id: _id
                                                 )));
                                   },
                                   title: TextDataContentGroup(
-                                      title: _groupListItems[index].name),
+                                      title: _groupListItems[index].name.toString()),
                                   trailing: IconButton(
                                     icon: Icon(Icons.add_circle_outline),
                                     onPressed: () {

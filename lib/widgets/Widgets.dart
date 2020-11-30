@@ -26,6 +26,7 @@ Widget addGuideBookInputField({
   String inputField,
 }) {
   return TextFormField(
+      textInputAction:  TextInputAction.next,
       controller: controller,
       decoration: InputDecoration(
         hintText: hintText,
@@ -45,6 +46,32 @@ Widget addGuideBookInputField({
       });
 }
 
+Widget addGuideBookGSMInputField({
+  TextEditingController controller,
+  String hintText,
+  String inputField,
+}) {
+  return TextFormField(
+      maxLength: 16,
+      keyboardType:   TextInputType.number,
+      controller: controller,
+      decoration: InputDecoration(
+        hintText: hintText,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black, width: 2),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey, width: 1),
+        ),
+      ),
+      style: TextStyle(fontFamily: 'Raleway'),
+      validator: (value) {
+        if (value.isEmpty) {
+          return '$inputField can\'t be empty';
+        }
+        return null;
+      });
+}
 ComposeMessageError({BuildContext context, String errorMessage}){
   return showDialog(
       context: context,
@@ -174,6 +201,7 @@ Widget ComposeMessageContentField({
   String inputField,
 }) {
   return TextFormField(
+      textInputAction:  TextInputAction.done,
       controller: controller,
       maxLines: 10,
       decoration: InputDecoration(
@@ -224,7 +252,7 @@ Widget ComposeMessageController(
 }
 
 Widget ComposeMessageContentController(
-    {TextEditingController controller, String hintText, String inputField}) {
+    {TextEditingController controller, String hintText, String inputField,}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 16.0),
     child: ComposeMessageContentField(

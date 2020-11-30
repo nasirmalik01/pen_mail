@@ -106,7 +106,7 @@ class _ComposeMessageGroupState extends State<ComposeMessageGroup> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: CheckboxListTile(
-                            title: Text(_groupListItems[index].name),
+                            title: Text(_groupListItems[index].name.toString()),
                             value: _groupListItems[index].isCheck ?? false,
                             onChanged: (bool value) {
                               setState(() {

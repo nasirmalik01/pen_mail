@@ -117,8 +117,10 @@ class _GuideBookState extends State<GuideBook> {
                                 child: Row(
                                   children: [
                                     TextDataTitle(title: 'Surname: '),
-                                    TextDataContent(
-                                        title: guideBookItems[index].surname)
+                                    Expanded(
+                                      child: TextDataContent(
+                                          title: guideBookItems[index].surname.toString()),
+                                    )
                                   ],
                                 ),
                               ),
@@ -137,7 +139,7 @@ class _GuideBookState extends State<GuideBook> {
                                       children: [
                                         TextDataTitle(title: 'Email: '),
                                         TextDataContent(
-                                            title: guideBookItems[index].email)
+                                            title: guideBookItems[index].email.toString())
                                       ],
                                     ),
                                     IconButton(
@@ -160,7 +162,7 @@ class _GuideBookState extends State<GuideBook> {
                                         _gsmUpdateController =
                                         TextEditingController(
                                             text:
-                                            guideBookItems[index].gsm);
+                                            guideBookItems[index].gsm.toString());
                                         showDialog(
                                             context: context,
                                             builder: (BuildContext context) {

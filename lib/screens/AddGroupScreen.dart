@@ -137,8 +137,8 @@ class _AddGroupScreenState extends State<AddGroupScreen> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: CheckboxListTile(
-                                  title: Text(guideBookItems[index].surname),
-                                  subtitle: Text(guideBookItems[index].email),
+                                  title: Text(guideBookItems[index].surname.toString()),
+                                  subtitle: Text(guideBookItems[index].email.toString()),
                                   value: guideBookItems[index].isCheck ?? false,
                                   onChanged: (bool value) {
                                     setState(() {
