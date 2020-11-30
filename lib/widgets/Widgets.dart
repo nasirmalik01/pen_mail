@@ -71,6 +71,30 @@ ComposeMessageError({BuildContext context, String errorMessage}){
       });
 }
 
+ComposeMessageSendMessage({BuildContext context, String errorMessage, Function onPress}){
+  return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(
+            errorMessage,
+            style: TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+          ),
+          actions: [
+            FlatButton(
+              onPressed: onPress,
+              child: Text(
+                'Okay',
+                style: TextStyle(
+                    fontFamily: 'Raleway',
+                    color: Colors.red),
+              ),
+            )
+          ],
+        );
+      });
+}
+
 ComposeMessageButton(
     {MediaQueryData mediaQueryData, String title, Function onPress}) {
   return Container(
